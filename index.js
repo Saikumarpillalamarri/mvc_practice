@@ -3,11 +3,13 @@ var mysql2 = require("mysql2");
 
 var app = express();
 
+require("dotenv").config();
+console.log(process.env);
 var conn = mysql2.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"root",
-    database:"employee"
+    host:process.env.host,
+    user:process.env.user,
+    password:process.env.password,
+    database:process.env.database
 })
 app.get("/",(req,res)=>{
     res.send("hello")
@@ -20,7 +22,7 @@ conn.connect((err)=>{
         console.log("connected to database")
     }
 })
-var port = 3000;
+var port = process.env.port;
 
 app.listen(port,()=>{
     console.log(`localhost:${port}`)
